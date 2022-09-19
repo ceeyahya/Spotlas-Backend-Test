@@ -4,7 +4,6 @@
 -- https://m.facebook.com/twocentspizza/?locale2=en_GB => m.facebook.com
 -- The proposed solution uses the `SUBSTRING()` function and Regular Expressions
 -- `SUBSTRING(string, position, substring_length)` Function: return a part of a string.
--- Regex :
 UPDATE "MY_TABLE"
 SET website = SUBSTRING(website FROM '(?:.*://)?(?:www\.)?([^/?]*)');
 
@@ -23,9 +22,17 @@ HAVING COUNT(website) > 1
 ORDER BY COUNT(website);
 
 -- Task 1.3 - Return spots that have a domain that is greater to 1
---
 SELECT website, COUNT(website)
 FROM "MY_TABLE"
 GROUP BY website
 HAVING COUNT(website) > 1
 ORDER BY COUNT(website);
+
+
+-- Task 1.4 - Write a PL/SQL Script for 1.1
+BEGIN
+UPDATE
+    website
+SET
+    website = SUBSTRING(website FROM '(?:.*://)?(?:www\.)?([^/?]*)');
+END;
